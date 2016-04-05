@@ -1,4 +1,10 @@
 # Zero Ponzi
-A simple and easy to understand ponzi scheme contract where players are paid back their initial investment + 25%. 
-Deposits are limited to 10Eth at once to avaoid very large paywalls.
+Ok, I was getting a bit despondent with all the over-the top Ponzi schemes floating around, especially with all the creators taking 10% for doing nothing. So I put together my own (from scratch, no copy & paste) with 0% going to the creator and a 125% return, i.e. while deposits to it are ongoing you get back 125% (1.25x) of what you put in.
 
+Basically send between 100 finney (0.1 ether) and 10 ether to (like the 1.25 multiplier, the 10 ether maximum is set "low" to allow payout flows)
+
+0x43bbc7fafb860d974037b8f7dd06b6f6fe799b3e 
+
+Source code is also attached on etherscan.io for verification purposes. It is simple, no frills, no fuss.
+
+http://etherscan.io/address/0x43bbc7fafb860d974037b8f7dd06b6f6fe799b3e
