@@ -100,6 +100,7 @@
         
         
         <div align="center">
+              <h2>Welcome to ZeroP the first transparent 0% Ethereum Pyramid</h2>
 	            <strong>To Participate, Send Between .01 and 10 ETH To: <h1 style="color:#0ce3ac;"><span id="address">0x43bbc7fafb860d974037b8f7dd06b6f6fe799b3e</span></h1></strong></div><br /><br />
 	                    
         
@@ -242,23 +243,18 @@
     <script src="https://www.myetherwallet.com/js/etherwallet-static.min.js"></script>
     <script src="http://ethereumwall.com/assets/js/web3.min.js"></script>
 	<script>
-
     var numberOfBenefactors = 0;
     var nextToUpdate = 0;
     var payoutIndex = 0;
     var contractBalance=0;
     var address = [];
     var amount = [];
-
 function connect() {
     if (typeof web3 === 'undefined') {
         window.web3 = new Web3();
     }
-
     web3.setProvider(new web3.providers.HttpProvider($("#ethereum-node").val()));
-
     abi = JSON.parse('[{"constant":true,"inputs":[],"name":"MAX_VALUE","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"payouts","outputs":[{"name":"addr","type":"address"},{"name":"yield","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"payoutIndex","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"RET_MUL","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"MIN_VALUE","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"payoutTotal","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"RET_DIV","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"inputs":[],"type":"constructor"}]');
-
     window.ethContract = web3.eth.contract(abi).at($("#contract-address").val());
     
     
@@ -276,7 +272,6 @@ function connect() {
     
     
     nextToUpdate = 0;
-
 	payoutIndex = ethContract.payoutIndex()['c'][0];
 	console.log(payoutIndex);
 	
@@ -286,19 +281,12 @@ function connect() {
     console.log(ethContract);
     
     nextToUpdate=payoutIndex;
-
     updateBenefactors();
-
-
     $('#benefactorpanel').show();
-
 }
-
-
 function update() {
 	
 	
-
 	numberOfBenefactors = address.length;
 	console.log("number of benefactors in queue: "+numberOfBenefactors);
 	
@@ -312,20 +300,14 @@ function update() {
     
 	
 	for (i=payoutIndex; i < numberOfBenefactors; i++) {
-
-
     console.log(">>>");
     console.log(i);
-
 	depositsbeforepayout = 0;
-
     for (j = payoutIndex; j <= i; j++) {
 		depositsbeforepayout = depositsbeforepayout+amount[j];
 	}
-
 	depositsbeforepayout = depositsbeforepayout- contractBalance;
 	
-
 	console.log(depositsbeforepayout);
 	console.log(address[i]);
 	console.log(amount[i]);
@@ -340,33 +322,24 @@ function update() {
 	
 	}
 	
-
 	}
 	
-
-
     $('#dashboardstats').show();
     $('#loadingText').hide();
 }
-
 function updateBenefactors() {
-
 	i = nextToUpdate;
 	
 	thispayout = ethContract.payouts(i);
 	
 	console.log(thispayout);
-
 	benefactor = thispayout[0];
 	address[i]=benefactor;	
 	
 	benefactoramount = thispayout[1]['c'][0];
 	amount[i]=benefactoramount;
-
 	if(benefactor!="0x"){
-
 	htmlToInsert = '<tr id="addressLine' + benefactor + '" class="bounceInDown animated"><td>' + (i + 1) + '</td><td><div class="addressIdenticon-' + benefactor + '" style="width:30px;height:30px;float:left;border-radius: 50%;box-shadow: inset 0 2px 2px hsla(0,0%,100%,.5),inset 0 -1px 8px rgba(0,0,0,.6);"></div> &nbsp; <a href="https://etherscan.io/address/' + benefactor + '#internaltx" target="_blank" style="font-size:14pt;">' + benefactor + '</a></td><td>' + ((benefactoramount/1.25)/10000) + ' ETH</td><td>' + (benefactoramount/10000) + ' ETH</td><td><div id="needed4payout-'+i+'">calculating...</div></td></tr>';
-
     $('#nextPayout').prepend(htmlToInsert);
     
     
@@ -380,7 +353,6 @@ function updateBenefactors() {
 	}).toDataURL() + ')');
 	
 	}
-
 	
 	nextToUpdate++;
 	updateAgain = setTimeout(updateBenefactors, 1);
@@ -389,11 +361,8 @@ function updateBenefactors() {
 	}
 	
 }
-
 //Auto Connect
 updateContractData = setTimeout(connect, 1);
-
-
 </script>
   
   
